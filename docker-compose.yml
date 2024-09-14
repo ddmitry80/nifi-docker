@@ -1,0 +1,27 @@
+version: "3"
+services:
+  zookeeper:
+    hostname: zookeeper
+    container_name: zookeeper
+    image: bitnami/zookeeper:3.7.*
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+
+  nifi:
+    image: apache/nifi:1.19.*
+    ports:
+      - 8443 # Unsecured HTTP Web Port
+    environment:
+      - SINGLE_USER_CREDENTIALS_USERNAME=admin
+      - SINGLE_USER_CREDENTIALS_PASSWORD=Password123456
+      - NIFI_WEB_HTTP_PORT=8443
+      - NIFI_CLUSTER_IS_NODE=true
+      - NIFI_CLUSTER_NODE_PROTOCOL_PORT=8082
+      - NIFI_ZK_CONNECT_STRING=zookeeper:2181
+      - NIFI_ELECTION_MAX_WAIT=1 min
+
+  registry:
+    image: apache/nifi-registry:1.27.*
+    ports:
+      - 18080:18080
+
