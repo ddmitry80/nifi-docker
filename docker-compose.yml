@@ -3,12 +3,12 @@ services:
   zookeeper:
     hostname: zookeeper
     container_name: zookeeper
-    image: bitnami/zookeeper:3.7.*
+    image: bitnami/zookeeper:3.7.1
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
 
   nifi:
-    image: apache/nifi:1.19.*
+    image: apache/nifi:1.19.0
     ports:
       - 8443 # Unsecured HTTP Web Port
     environment:
@@ -21,7 +21,7 @@ services:
       - NIFI_ELECTION_MAX_WAIT=1 min
 
   registry:
-    image: apache/nifi-registry:1.27.*
+    image: apache/nifi-registry:1.27.0
     ports:
       - 18080:18080
 
