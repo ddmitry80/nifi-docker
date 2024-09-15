@@ -1,7 +1,7 @@
 services:
 
   nifi:
-    image: apache/nifi:1.19.0
+    image: apache/nifi:1.27.0
     ports:
       - 18443:8443 # Unsecured HTTP Web Port
     environment:
