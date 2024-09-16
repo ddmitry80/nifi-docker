@@ -22,11 +22,23 @@ url: http://localhost:18080/nifi-registry
 ### PostgreSQL
 Расположение драйвера в контейнере: `/opt/nifi/nifi-current/drivers/postgresql-42.7.4.jar ` 
 
-Запуск для учебных целей
-```sh
-docker run --name postgres_app -p 5432:5432 -e POSTGRESS_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=app -d postgres:16.4
-```
-Строка connection: `jdbc://host.docker.internal:5432/app`  
+Строка connection: `jdbc://posgtgres:5432/app`  
+user/password: `postgres`/`postgres`  
+
+## Kafka
+Доступна для учебных задач на порту 9092, имя хоста `kafka`  
+
+## Kafka-UI
+doc: 
+- https://docs.kafka-ui.provectus.io/
+- https://habr.com/ru/articles/753398/  
+
+ui: http://localhost:8082/   
+При настройке указать:
+- Cluster name: `Kafka Cluster` или любое другое
+- Bootstrap Servers: `PLAINTEXT://kafka` port `29092`
+
+
 
 ## Другое
 
