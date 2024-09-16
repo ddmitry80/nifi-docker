@@ -22,8 +22,9 @@ url: http://localhost:18080/nifi-registry
 ### PostgreSQL
 Расположение драйвера в контейнере: `/opt/nifi/nifi-current/drivers/postgresql-42.7.4.jar ` 
 
-Строка connection: `jdbc://posgtgres:5432/app`  
+Строка connection: `jdbc:postgresql://posgtgres:5432/app`  
 user/password: `postgres`/`postgres`  
+Для доступа снаружи используется порт 5437 или jdbc:postgresql://localhost:5437/app
 
 ## Kafka
 Доступна для учебных задач на порту 9092, имя хоста `kafka`  
