@@ -44,6 +44,6 @@ ui: http://localhost:8082/
 
 Файловая система хоста (каталог `shared-folder`) подключена к `/opt/nifi/nifi-current/ls-target`  
 
-Для подключения к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
+Для подключения из NiFi к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
 
 
