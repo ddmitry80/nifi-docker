@@ -7,6 +7,11 @@
 docker compose up
 ```
 
+Остановить
+```sh
+docker compose stop
+```
+
 ## NiFi
 docs: https://nifi.apache.org/documentation/  
 url: http://localhost:18443/nifi/  
