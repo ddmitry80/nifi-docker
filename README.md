@@ -30,7 +30,7 @@ docker run --name postgres_app -p 5432:5432 -e POSTGRESS_USER=postgres -e POSTGR
 
 ## Другое
 
-Файловая система хоста:  `/opt/nifi/nifi-current/ls-target  `
+Файловая система хоста (каталог `shared-folder`) подключена к `/opt/nifi/nifi-current/ls-target`  
 
 Для подключения к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
 
