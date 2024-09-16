@@ -1,6 +1,6 @@
 # nifi-docker
 
-Простой инстанс NiFi и NiFi Registry, для учебных целей
+Учебная система, включающая в себя NiFi, NiFi Registry, Postgres, Kafka, Kafka UI
 
 Обычный запуск
 ```sh
