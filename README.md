@@ -19,12 +19,19 @@ url: http://localhost:18080/nifi-registry
 
 ## Подключение к БД
 
-### Драйвер postgreSQL
-Расположение в контейнере: `/opt/nifi/nifi-current/drivers/postgresql-42.7.4.jar ` 
+### PostgreSQL
+Расположение драйвера в контейнере: `/opt/nifi/nifi-current/drivers/postgresql-42.7.4.jar ` 
+
+Запуск для учебных целей
+```sh
+docker run --name postgres_app -p 5432:5432 -e POSTGRESS_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=app -d postgres:16.4
+```
+Строка connection: `jdbc://host.docker.internal:5432/app`  
 
 ## Другое
 
 Файловая система хоста:  `/opt/nifi/nifi-current/ls-target  `
 
 Для подключения к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
+
 
