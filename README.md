@@ -15,13 +15,14 @@ url: http://localhost:18443/nifi/
 docs: https://nifi.apache.org/docs/nifi-registry-docs/  
 url: http://localhost:18080/nifi-registry  
 
-### Подключение к registry
-http://registry:18080
+Подключение к registry: http://registry:18080
 
 ## Подключение к БД
 
 ### Драйвер postgreSQL
 Расположение в контейнере: `/opt/nifi/nifi-current/drivers/postgresql-42.7.4.jar ` 
+
+## Другое
 
 Файловая система хоста:  `/opt/nifi/nifi-current/ls-target  `
 
