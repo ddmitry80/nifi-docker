@@ -25,3 +25,5 @@ http://registry:18080
 
 Файловая система хоста:  `/opt/nifi/nifi-current/ls-target  `
 
+Для подключения к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
+
