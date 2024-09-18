@@ -964,11 +964,11 @@
                         <retry>false</retry>
                     </relationships>
                     <relationships>
-                        <autoTerminate>false</autoTerminate>
+                        <autoTerminate>true</autoTerminate>
                         <name>success</name>
                         <retry>false</retry>
                     </relationships>
-                    <state>STOPPED</state>
+                    <state>RUNNING</state>
                     <style/>
                     <type>org.apache.nifi.processors.kafka.pubsub.PublishKafkaRecord_2_6</type>
                 </processors>
@@ -1078,7 +1078,7 @@
                         <name>success</name>
                         <retry>false</retry>
                     </relationships>
-                    <state>STOPPED</state>
+                    <state>RUNNING</state>
                     <style/>
                     <type>org.apache.nifi.processors.standard.GenerateRecord</type>
                 </processors>
@@ -1092,5 +1092,5 @@
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>09/17/2024 19:58:37 UTC</timestamp>
+    <timestamp>09/18/2024 18:42:30 UTC</timestamp>
 </template>
