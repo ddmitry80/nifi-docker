@@ -41,7 +41,7 @@ psql -d app < /nifi-templates/SampleKafka2Postgres.sql
 ```sh
 docker compose exec -it postgres su postgres
 psql -d app
-select * from samplekafka2postgres limit 10;
+select * from samplekafka2postgres order by id desc limit 10;
 ```
 
 Для доступа снаружи используется порт 5437 или jdbc:postgresql://localhost:5437/app
