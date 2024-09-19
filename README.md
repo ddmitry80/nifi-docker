@@ -31,6 +31,19 @@ url: http://localhost:18080/nifi-registry
 - Database Driver Class Name: `org.postgresql.Driver`  
 - user/password: `postgres`/`postgres`  
 
+Для заливки дампа
+```sh
+docker compose exec -it postgres su postgres
+psql -d app < /nifi-templates/SampleKafka2Postgres.sql
+```
+
+Просмотр таблицы
+```sh
+docker compose exec -it postgres su postgres
+psql -d app
+select * from samplekafka2postgres limit 10;
+```
+
 Для доступа снаружи используется порт 5437 или jdbc:postgresql://localhost:5437/app
 
 ## Kafka

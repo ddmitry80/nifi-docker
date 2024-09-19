@@ -1,4 +1,4 @@
-create table samplekafka2postgres (
+create table if not exists samplekafka2postgres (
 	id serial primary key,
 	dttm TIMESTAMPTZ,
 	txt text
