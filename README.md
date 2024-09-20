@@ -39,8 +39,7 @@ psql -d app < /nifi-templates/SampleKafka2Postgres.sql
 
 Просмотр таблицы
 ```sh
-docker compose exec -it postgres su postgres
-psql -d app
+docker compose exec -it postgres bash -c "export PGPASSWORD=postgres; psql -U postgres -d app"
 select * from samplekafka2postgres order by id desc limit 10;
 ```
 
