@@ -1,7 +1,9 @@
-create table if not exists samplekafka2postgres (
-	id serial primary key,
-	dttm TIMESTAMPTZ,
-	txt text
+CREATE TABLE IF NOT EXISTS public.samplekafka2postgres (
+	id serial4 NOT NULL,
+	ins_dttm timestamptz DEFAULT now() NOT NULL,
+	dttm timestamptz NULL,
+	txt text NULL,
+	CONSTRAINT samplekafka2postgres_pkey PRIMARY KEY (id)
 );
 
 delete from samplekafka2postgres
