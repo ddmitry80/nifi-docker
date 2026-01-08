@@ -5,7 +5,7 @@ services:
     ports:
       - 18443:8443 # Unsecured HTTP Web Port
     extra_hosts:
-    - "host.docker.internal:host-gateway"
+      - "host.docker.internal:host-gateway"
     environment:
       - SINGLE_USER_CREDENTIALS_USERNAME=admin
       - SINGLE_USER_CREDENTIALS_PASSWORD=Password123456
@@ -28,7 +28,7 @@ services:
     ports:
       - 5437:5432
     environment:
-      POSTGRESS_USER: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: app
     volumes:
