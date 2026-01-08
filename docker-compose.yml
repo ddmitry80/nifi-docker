@@ -13,7 +13,13 @@ services:
     volumes:
       - ./drivers:/opt/nifi/nifi-current/drivers
       - ./shared-folder:/opt/nifi/nifi-current/ls-target
-      # - ./nifi-conf:/opt/nifi/nifi-current/conf
+      - nifi-conf:/opt/nifi/nifi-current/conf
+      - nifi-state:/opt/nifi/nifi-current/state
+      # Если хочешь сохранять очереди/контент/провенанс (обычно для обучения не нужно) — раскомментируй:
+      # - nifi-flowfile-repo:/opt/nifi/nifi-current/flowfile_repository
+      # - nifi-content-repo:/opt/nifi/nifi-current/content_repository
+      # - nifi-provenance-repo:/opt/nifi/nifi-current/provenance_repository
+      # - nifi-database-repo:/opt/nifi/nifi-current/database_repository
 
   registry:
     image: apache/nifi-registry:1.27.0
@@ -21,6 +27,9 @@ services:
       - 18080:18080
     environment:
       - NIFI_REGISTRY_WEB_HTTP_PORT=18080
+    volumes:
+      - registry-db:/opt/nifi-registry/nifi-registry-current/database
+      - registry-flow-storage:/opt/nifi-registry/nifi-registry-current/flow_storage
       
   postgres:
     image: postgres:16.4
@@ -41,6 +50,9 @@ services:
     container_name: kafka
     ports:
       - 9092:9092
+    # Если хочешь сохранять топики/сообщения между `docker compose down/up` — раскомментируй:
+    # volumes:
+    #   - kafka-data:/tmp/kraft-combined-logs
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT,CONTROLLER:PLAINTEXT
@@ -73,3 +85,12 @@ services:
 
 volumes:
   pgdata:
+  nifi-conf:
+  nifi-state:
+  registry-db:
+  registry-flow-storage:
+  # nifi-flowfile-repo:
+  # nifi-content-repo:
+  # nifi-provenance-repo:
+  # nifi-database-repo:
+  # kafka-data:

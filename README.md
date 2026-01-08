@@ -13,15 +13,31 @@ docker compose ps
 docker compose stop
 ```
 
+Запустить обратно (после `stop`, состояние сохраняется):
+```sh
+docker compose start
+```
+
 Удалить контейнеры и сеть:
 ```sh
 docker compose down
 ```
+Потом поднять обратно (с сохранённым состоянием в volumes):
+```sh
+docker compose up -d
+```
 
-Удалить ещё и данные Postgres (деструктивно):
+Удалить ещё и volumes (полный “чистый ресет”, деструктивно):
 ```sh
 docker compose down -v
 ```
+
+### Что сохраняется между перезапусками
+- `docker compose stop/start` — сохраняется всё (контейнеры не удаляются).
+- `docker compose down` — контейнеры удаляются, но volumes остаются: сохраняются NiFi (conf/state), NiFi Registry, Postgres.
+- `docker compose down -v` — полный “чистый ресет”: удаляются и контейнеры, и volumes.
+
+Примечание: Kafka-сообщения/топики по умолчанию не сохраняем между `docker compose down` → `up` (чтобы не копить дисковое пространство). Между `stop` → `start` Kafka сохраняется. Пример volume для Kafka есть в `docker-compose.yml`.
 
 ## Адреса и доступы
 - NiFi: http://localhost:18443/nifi/ (логин `admin`, пароль `Password123456`)
@@ -66,6 +82,7 @@ Postgres проброшен наружу на порт `5437`, поэтому и
 ```sh
 docker compose exec -T postgres psql -U postgres -d app -f /nifi-templates/SampleKafka2Postgres.sql
 ```
+Запускай это после первого старта или после `docker compose down -v` (скрипт не идемпотентный: при повторном запуске будут ошибки про существующие схемы/таблицы).
 
 ### Через консоль (если нужно)
 Просмотр данных:
@@ -84,8 +101,8 @@ select * from ods.samplekafka2postgres order by id desc limit 10;
 - `SampleKafka2Postgres.json` — читает из Kafka и пишет в Postgres (в `stg.samplekafka2postgres`, затем вызывает `ods.load_samplekafka2postgres()`)
 
 Рекомендуемый минимальный сценарий:
-1) Создай topic `Sample2Kafka` в Kafka UI (если он не создался автоматически).
-2) Импортируй flow в NiFi (в зависимости от UI: import/upload template для `.xml` или import flow definition для `.json`).
+1) Topic `Sample2Kafka` руками создавать обычно не нужно: он создаётся автоматически при первой попытке записи (когда запускаешь flow-паблишер). Если по какой-то причине не создался — можно создать в Kafka UI.
+2) Импортируй flow в NiFi (в зависимости от UI: import/upload template для `.xml` или import flow definition для `.json`). Если импортировал раньше — после `docker compose down` он сохранится.
 3) Внутри flow включи Controller Services, затем стартуй процессоры.
 
 Kafka UI уже настроен в `docker-compose.yml`:
