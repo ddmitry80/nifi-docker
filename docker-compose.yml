@@ -63,8 +63,13 @@ services:
     image: provectuslabs/kafka-ui:v0.7.2
     ports:
       - 8082:8080
+    depends_on:
+      - kafka
     environment:
-      DYNAMIC_CONFIG_ENABLED: true
+      DYNAMIC_CONFIG_ENABLED: "true"
+      KAFKA_CLUSTERS_0_NAME: "Kafka Cluster"
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: "kafka:29092"
+      KAFKA_CLUSTERS_0_PROPERTIES_SECURITY_PROTOCOL: "PLAINTEXT"
 
 volumes:
   pgdata:

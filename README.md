@@ -54,9 +54,9 @@ doc:
 - https://habr.com/ru/articles/753398/  
 
 ui: http://localhost:8082/   
-При настройке указать:
-- Cluster name: `Kafka Cluster` или любое другое
-- Bootstrap Servers: `PLAINTEXT://kafka` port `29092`
+Кластер автоматически поднимается из `docker-compose.yml`:
+- Cluster name: `Kafka Cluster`
+- Bootstrap Servers: `kafka:29092`
 
 
 
@@ -65,5 +65,4 @@ ui: http://localhost:8082/
 Файловая система хоста (каталог `shared-folder`) подключена к `/opt/nifi/nifi-current/ls-target`  
 
 Для подключения из NiFi к сервисам, работающим на локальной машине, вместо `localhost` использовать `host.docker.internal`
-
 
