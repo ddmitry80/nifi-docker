@@ -100,6 +100,24 @@ select * from ods.samplekafka2postgres order by id desc limit 10;
 - `Sample2Kafka.xml` / `Sample2Kafka.json` — публикует сообщения в Kafka topic `Sample2Kafka`
 - `SampleKafka2Postgres.json` — читает из Kafka и пишет в Postgres (в `stg.samplekafka2postgres`, затем вызывает `ods.load_samplekafka2postgres()`)
 
+### Памятка: как импортировать process group / flow в NiFi
+Файлы нужно загружать через браузер из репозитория на твоей машине (`nifi-templates/`).
+
+**Вариант 1: шаблон `.xml` (Template)**
+1) Открой NiFi: http://localhost:18443/nifi/
+2) В верхнем меню найди `Templates` → `Upload Template` → выбери файл `nifi-templates/Sample2Kafka.xml`.
+3) На канвасе: правый клик → `Instantiate Template` (или иконка Template на панели) → выбери шаблон → кликни на канвас, чтобы разместить process group.
+
+**Вариант 2: flow definition `.json`**
+В зависимости от UI/версии пункт называется по-разному, но смысл один — “загрузить process group/flow definition из файла”:
+1) В верхнем меню найди действие вроде `Upload` / `Import` / `Process Group` → выбери загрузку из файла.
+2) Выбери `nifi-templates/SampleKafka2Postgres.json` (или `Sample2Kafka.json`) и размести process group на канвасе.
+
+После импорта обычно нужно:
+- зайти внутрь process group;
+- включить Controller Services (Configure → `Controller Services` → Enable, или “enable all controller services”);
+- затем стартовать процессоры.
+
 Рекомендуемый минимальный сценарий:
 1) Topic `Sample2Kafka` руками создавать обычно не нужно: он создаётся автоматически при первой попытке записи (когда запускаешь flow-паблишер). Если по какой-то причине не создался — можно создать в Kafka UI.
 2) Импортируй flow в NiFi (в зависимости от UI: import/upload template для `.xml` или import flow definition для `.json`). Если импортировал раньше — после `docker compose down` он сохранится.
